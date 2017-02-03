@@ -1,4 +1,4 @@
-# MEAN stack hero: all sections - the source code for a hotel blog example
+# MEAN Stack Hero: all sections - the SPA/API source code for a hotel blog example
 
 This repo contains a MEAN stack SPA/API built through   
 Full Stack Training's most excellent MEAN Stack course: 
@@ -10,6 +10,5 @@ ALL dependencies are in package.json;
 Running `npm install` will install ALL necessary dependencies.
 
 [The complete JavaScript developer: MEAN stack zero-to-hero]
-Although under an ISC license, made a private - to respect the author's work.
-This private implementation for the use of the course holder: mikieseven
+ISC license, pulled offline to reduce access to the course's source; this implementation for the use of the course holder: mikieseven
 

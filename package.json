@@ -1,7 +1,7 @@
 {
   "name": "mean-stack-hero",
   "version": "1.0.0",
-  "description": "This repo contains the MEAN stack application that is built through  Full Stack Training's MEAN Stack course.",
+  "description": "MEAN stack application built through: Full Stack Training's MEAN Stack course.",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.14.2",
@@ -22,14 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fullstacktraining/mean-stack-hero.git"
+    "url": "git+https://github.com/mikieseven/ubiquitous-waddle.git"
   },
   "author": "Tamas Piros",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fullstacktraining/mean-stack-hero/issues"
-  },
-  "homepage": "https://github.com/fullstacktraining/mean-stack-hero#readme",
+  "bugs": "",
+  "homepage": "",
   "keywords": [
     "API",
     "MEAN",

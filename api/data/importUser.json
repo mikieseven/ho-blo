@@ -1,0 +1,89 @@
+db.users.insert(
+[{
+  "username" : "Fred",
+  "name" : "Fred Astair",
+  "password" : "asdf"},
+  
+  {"username" : "Mike",
+  "name" : "Mike Mike",
+  "password" : "asdf"},
+  
+  {"username" : "Jane",
+  "name" : "Jane Austen",
+  "password" : "asdf"},
+  
+  {"username" : "Zim",
+  "name" : "Invader Zim",
+  "password" : "asdf"
+}]
+)
+
+
+Results -------
+
+C:\Program Files\MongoDB\Server\3.2\bin>mongo
+2017-02-03T06:24:48.254-0600 I CONTROL  [main] Hotfix KB2731284 or later update is installed, no
+ need to zero-out data files
+MongoDB shell version: 3.2.7
+connecting to: test
+> use meanhotel
+switched to db meanhotel
+> show collections
+hotels
+users
+> db.users.insert(
+... [{
+...   "username" : "Fred",
+...   "name" : "Fred Astair",
+...   "password" : "asdf"},
+...
+...   {"username" : "Mike",
+...   "name" : "Mike Mike",
+...   "password" : "asdf"},
+...
+...   {"username" : "Jane",
+...   "name" : "Jane Austen",
+...   "password" : "asdf"},
+...
+...   {"username" : "Zim",
+...   "name" : "Invader Zim",
+...   "password" : "asdf"
+... }]
+... )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 4,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("58948b948789242dd2702c16"),
+        "username" : "Fred",
+        "name" : "Fred Astair",
+        "password" : "asdf"
+}
+{
+        "_id" : ObjectId("58948b948789242dd2702c17"),
+        "username" : "Mike",
+        "name" : "Mike Mike",
+        "password" : "asdf"
+}
+{
+        "_id" : ObjectId("58948b948789242dd2702c18"),
+        "username" : "Jane",
+        "name" : "Jane Austen",
+        "password" : "asdf"
+}
+{
+        "_id" : ObjectId("58948b948789242dd2702c19"),
+        "username" : "Zim",
+        "name" : "Invader Zim",
+        "password" : "asdf"
+}
+>
+

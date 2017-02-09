@@ -1,0 +1,7 @@
+users.controllers.js - login
+
+// IF, a user w/ 60 char bcrypt hash of plaintext PW 
+   // could be inserted into the users DB, to pass the bcrypt comparison
+   // would a token be issued for that username?
+   // What if and unsecured public facing MongoDB upserted a root admin json?
+   //

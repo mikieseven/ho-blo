@@ -5,8 +5,10 @@ function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
 
   vm.isLoggedIn = function() {
     if (AuthFactory.isLoggedIn) {
+		console.log(' LoggedIn: '+vm.username);
       return true;
     } else {
+// console.log('!LoggedIn: '+vm.username);
       return false;
     }
   };
@@ -27,13 +29,14 @@ function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
           vm.loggedInUser = decodedToken.username;
         }
       }).catch(function(error) {
-        console.log(error);
+        console.log('login-POST error: '+ error);
       })
 
     }
   }
 
   vm.logout = function() {
+	  console.log('logout '+ vm.username);
     AuthFactory.isLoggedIn = false;
     delete $window.sessionStorage.token;
     $location.path('/');

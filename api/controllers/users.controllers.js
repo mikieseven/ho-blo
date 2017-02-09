@@ -26,27 +26,46 @@ module.exports.register = function(req, res) {
 };
 
 module.exports.login = function(req, res) {
-  console.log('logging in user');
+
   var username = req.body.username;
   var password = req.body.password;
 
   User.findOne({
     username: username
-  }).exec(function(err, user) {
-    if (err) {
-      console.log(err);
-      res.status(400).json(err);
-    } else {
-      if (bcrypt.compareSync(password, user.password)) {
-        console.log('User found', user);
-        var token = jwt.sign({ username: user.username }, 's3cr3t', { expiresIn: 3600 });
-        res.status(200).json({success: true, token: token});
-      } else {
-        res.status(401).json('Unauthorized');
-      }
-    }
+  }).exec(function(err, user) {  
+	// Test record: "Zim" is found but does not have encrypted ID; 
+	// no err thrown but will crash the app in bcrypt for PW format
+	  console.log('\n findOne return objects: '+ err + ' & '+ user); 
+	// User not found - err & user return null
+	  
+    if (err || !user) { // Check if err || user are null
+		if (!user) {
+			console.log("Status 400 - User not found");
+			res.status(400);
+		} else { // log the error
+			res.status(400).json(err);
+		}
+    } else {  // check the PW length == 60 char valid hash format
+		if (user.password.length < 60){ // check 4 unencrypted PW
+			console.log('Corrupted hash '+ user.password.length);
+			res.status(401).json('Fail - incorrect hash format');
+		} else {
+			if (bcrypt.compareSync(password, user.password)) { // hash format input
+				console.log('Accepted: ', user);
+				var token = jwt.sign({ username: user.username }, 's3cr3t', { expiresIn: 3600 });
+				res.status(200).json({success: true, token: token});
+			} else {
+				console.log('Authentication Failure - PW');
+				res.status(401).json('Authentication Fail');
+			}
+		}
+	}
   });
-};
+}; // IF, a user w/ 60 char bcrypt hash of plaintext PW 
+   // could be inserted into the users DB, to pass the bcrypt comparison
+   // would a token be issued for that username?
+   // What if and unsecured public facing MongoDB upserted a new root admin json?
+   // e.g. on a new instance of Bitnami or Strongloop MEAN stack
 
 module.exports.authenticate = function(req, res, next) {
   var headerExists = req.headers.authorization;

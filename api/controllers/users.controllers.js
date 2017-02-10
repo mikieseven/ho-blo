@@ -62,11 +62,13 @@ module.exports.login = function(req, res) {
 	}
   });
 }; 
-// The answer here is YES.
+
 // IF, a user w/ 60 char bcrypt hash of plaintext PW 
    // could be inserted into the users DB, to pass the bcrypt comparison
-   // would a token be issued for that username?  YES
+   // would a token be issued for that username?  
+   // The answer here is YES, YES, YES.
    
+   // first gain root access to the MongoDB instance
    // Register a user with PW == "whatever"
    // Create a new user json object for mongoimport 
    // use the "whatever" hash value from the registered user in the new user object

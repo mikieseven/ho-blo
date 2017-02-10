@@ -61,9 +61,20 @@ module.exports.login = function(req, res) {
 		}
 	}
   });
-}; // IF, a user w/ 60 char bcrypt hash of plaintext PW 
+}; 
+// The answer here is YES.
+// IF, a user w/ 60 char bcrypt hash of plaintext PW 
    // could be inserted into the users DB, to pass the bcrypt comparison
-   // would a token be issued for that username?
+   // would a token be issued for that username?  YES
+   
+   // Register a user with PW == "whatever"
+   // Create a new user json object for mongoimport 
+   // use the "whatever" hash value from the registered user in the new user object
+   // mongoimport the new user.json to the users collection
+   // login to the app as new user with "whatever" as PW
+   // a token will be issued to the new user ID
+   
+   
    // What if and unsecured public facing MongoDB upserted a new root admin json?
    // e.g. on a new instance of Bitnami or Strongloop MEAN stack
 

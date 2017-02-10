@@ -2,6 +2,20 @@ users.controllers.js - login
 
 // IF, a user w/ 60 char bcrypt hash of plaintext PW 
    // could be inserted into the users DB, to pass the bcrypt comparison
-   // would a token be issued for that username?
-   // What if and unsecured public facing MongoDB upserted a root admin json?
-   //
+   // would a token be issued for that username?  
+   // The answer here is YES, YES, YES.
+   
+   Overall the app and DB would have to be pretty unsecure, but someone inside the FW could do this
+   
+   // first gain root access to the application and 
+   // via the app Register a user with PW == "whatever"
+   // then gain access to the MongoDB directory instance 
+   // Create a new user json object for mongoimport 
+   // use the "whatever" hash value from the registered user in the new user object
+   // mongoimport the new user.json to the users collection
+   // login to the app as new user with "whatever" as PW
+   // a token will be issued to the new user ID
+   
+   
+   // What if and unsecured public facing MongoDB upserted a new root admin json?
+   // e.g. on a new instance of Bitnami or Strongloop MEAN stack

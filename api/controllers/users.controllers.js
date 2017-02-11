@@ -4,11 +4,11 @@ var bcrypt   = require('bcrypt-nodejs');
 var jwt      = require('jsonwebtoken');
 
 module.exports.register = function(req, res) {
-  console.log('registering user');
 
   var username = req.body.username;
   var name = req.body.name || null;
   var password = req.body.password;
+  console.log('Attempting registration: '+ username);
 
   User.create({
     username: username,
@@ -35,12 +35,12 @@ module.exports.login = function(req, res) {
   }).exec(function(err, user) {  
 	// Test record: "Zim" is found but does not have encrypted ID; 
 	// no err thrown but will crash the app in bcrypt for PW format
-	  console.log('\n findOne return objects: '+ err + ' & '+ user); 
+	//  console.log('\n findOne return objects: '+ err + ' & '+ user); 
 	// User not found - err & user return null
 	  
     if (err || !user) { // Check if err || user are null
 		if (!user) {
-			console.log("Status 400 - User not found");
+			console.log("Status 400 - notfound " + username );
 			res.status(400);
 		} else { // log the error
 			res.status(400).json(err);
@@ -48,15 +48,15 @@ module.exports.login = function(req, res) {
     } else {  // check the PW length == 60 char valid hash format
 		if (user.password.length < 60){ // check 4 unencrypted PW
 			console.log('Corrupted hash '+ user.password.length);
-			res.status(401).json('Fail - incorrect hash format');
+			res.status(401).json('Fail - hash < 60');
 		} else {
 			if (bcrypt.compareSync(password, user.password)) { // hash format input
-				console.log('Accepted: ', user);
+				console.log('Accepted: ', user.username);
 				var token = jwt.sign({ username: user.username }, 's3cr3t', { expiresIn: 3600 });
 				res.status(200).json({success: true, token: token});
 			} else {
-				console.log('Authentication Failure - PW');
-				res.status(401).json('Authentication Fail');
+				console.log('Authentication PW Failed');
+				res.status(401).json('Authentication PW Fail');
 			}
 		}
 	}
@@ -75,7 +75,6 @@ module.exports.login = function(req, res) {
    // mongoimport the new user.json to the users collection
    // login to the app as new user with "whatever" as PW
    // a token will be issued to the new user ID
-   
    
    // What if and unsecured public facing MongoDB upserted a new root admin json?
    // e.g. on a new instance of Bitnami or Strongloop MEAN stack

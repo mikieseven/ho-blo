@@ -1,0 +1,67 @@
+
+
+{	"name": "Hotel Karin",
+	"stars": 3,
+	"description": "The newly opened, small and charming Karin hotel is situated in the green belt of Budapest, 10 km north of the city centre, and offers excellent public transport links and free parking.\nAir-conditioned and nicely furnished en-suite double rooms with balconies and apartments provide for a peaceful night's rest. In the pleasant restaurant you can start every morning at the rich complimentary breakfast buffet.\nWireless internet access is available in the entire hotel free of charge.\n04. Újpest is a great choice for travellers interested in zoo, monuments and city trip.",
+	"photos": [
+		"/photos/hotel/hotelkarin/1.jpg",
+		"/photos/hotel/hotelkarin/2.jpg"
+	],
+	"currency": "HUF",
+	"rooms": [
+		{
+			"type": "Double or Twin Room",
+			"number": 10,
+			"description": "These are small rooms",
+			"photos": [
+				"/photos/room/hotelkarin/2.jpg",
+				"/photos/room/hotelkarin/5.jpg"
+			],
+			"price": 35000
+		},
+		{
+			"type": "Apartment (2 Adults)",
+			"number": 15,
+			"description": "These are amazing apartmants",
+			"photos": [
+				"/photos/room/hotelkarin/4.jpg",
+				"/photos/room/hotelkarin/6.jpg"
+			],
+			"price": 47500
+		}
+	],
+	"location": {
+		"address": "1047 Budapest, Foti ut 75, Hungary",
+		"coordinates": [
+			47.577586,
+			19.092553
+		]
+	},
+	"reviews": [
+		{
+			"name": "Tamas",
+			"id": "/user/tamas.json",
+			"review": "Great hotel",
+			"rating": 4
+		},
+		{
+			"name": "SadSack",
+			"rating": 1,
+			"review": "Just a one?",
+			"createdOn": {
+				"date": "2017-02-04T22:47:53.162Z"
+			}
+		}
+	],
+	"services": [
+		"Room service",
+		"Airport shuttle (surcharge)",
+		"24-hour front desk",
+		"Tour desk",
+		"Ticket service",
+		"Luggage storage",
+		"Laundry",
+		"Ironing service",
+		"Fax/photocopying"
+	]
+}

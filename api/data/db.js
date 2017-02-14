@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 //var dburl = 'mongodb://localhost:27017/meanhotel';
-var dburl = 'mongodb://root:k6i2vLcngVyu@localhost/meanhotel';
+var dburl = 'mongodb://root:k6i2vLcngVyu@localhost:27017/meanhotel';
 var retry = null;
 mongoose.connect(dburl);
 // console.log(dburl);

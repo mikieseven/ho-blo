@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 //var dburl = 'mongodb://localhost:27017/meanhotel';
-var dburl = 'mongodb://root:k6i2vLcngVyu@localhost:27017/meanhotel';
+var dburl = 'mongodb://root:k6i2vLcngVyu@127.0.0.1:27017/meanhotel';
 var retry = null;
 mongoose.connect(dburl);
 // console.log(dburl);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
-  console.log('Mongoose connected to ' + dburl);
-  console.log('YES, in db.js');
+  console.log('db.js - Mongoose connected to ' + dburl);
+  //console.log('YES, in db.js');
 });
 mongoose.connection.on('error', function(err) {
   console.log('Mongoose connection error: ' + err);

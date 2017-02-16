@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
-var dburl = 'mongodb://127.0.0.1:27017/meanhotel';
+// var dburl = 'mongodb:///opt/bitnami/mongod/tmp/mongodb-27017.sock/meanhotel';
+// var dburl = 'mongodb://127.0.0.1:27017/meanhotel';
 //var dburl = 'mongodb://localhost:27017/meanhotel';
-//var dburl = 'mongodb://root:k6i2vLcngVyu@127.0.0.1:27017/meanhotel';
+var dburl = 'mongodb://hotmgr:n0cashier@127.0.0.1:27017/meanhotel';
+//https://docs.mongodb.com/manual/reference/connection-string/
 var retry = null;
 mongoose.connect(dburl);
 // console.log(dburl);
@@ -9,7 +11,6 @@ mongoose.connect(dburl);
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
   console.log('db.js - Mongoose connected to ' + dburl);
-  //console.log('YES, in db.js');
 });
 mongoose.connection.on('error', function(err) {
   console.log('Mongoose connection error: ' + err);

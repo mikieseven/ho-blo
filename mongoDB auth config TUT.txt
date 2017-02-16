@@ -1,0 +1,107 @@
+// from the tut: https://scotch.io/tutorials/deploying-a-mean-app-to-amazon-ec2-part-2
+
+// Change to noauth
+cd stack
+cd mongodb
+ls
+sudo vi mongodb.conf
+
+
+// Restart mongodb
+cd ..
+ls
+sudo bash ctlscript.sh restart mongodb
+
+// login to MongoDB and revert the authentication mechanism
+> use admin
+> var schema = db.system.version.findOne({"_id": "authSchema"}) 
+> schema.currentVersion = 3 
+> db.system.version.save(schema)
+
+
+// create a new admin profile
+- administrator will work with the reverted authentication mechanism and work for remote connections
+
+> use meanhotel
+> db.createUser({
+        user: "hotmgr",
+        pwd: "n0cashier",
+        roles:[
+            {  "role" : "readWrite",
+               "db": "meanhotel"
+            }
+        ]})
+db.createUser({ user: "hotmgr", pwd: "n0cashier", roles:[{ "role" : "readWrite","db": "meanhotel" }]})
+		
+		
+		
+// Re-enable auth in mongoDB.conf
+cd stack/mongodb
+sudo vi mongodb.conf
+
+
+// restart mongodb
+cd ..
+sudo bash ctlscript.sh restart mongodb
+
+
+
+
+// results
+> use admin
+switched to db admin
+> var schema = db.system.version.findOne({"_id": "authSchema"})
+> schema.currentVersion = 3
+3 // success
+
+> db.system.version.save(schema)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> use meanhotel
+switched to db meanhotel
+> db.createUser({ user: "hotmgr", pwd: "n0cashier", roles:[{ "role" : "readWrite","db": "meanhotel" }]})
+Successfully added user: {
+        "user" : "hotmgr",
+        "roles" : [
+                {  "role" : "readWrite",
+                   "db" : "meanhotel"
+                } ] }
+>
+
+
+// can login with meanhotel's hotmgr but not admin's mikieseven
+
+bitnami@ip-172-31-33-183:~$ sudo mongo meanhotel -u hotmgr -p n0cashier
+MongoDB shell version: 3.2.11
+connecting to: /opt/bitnami/mongodb/tmp/mongodb-27017.sock:27017/meanhotel
+
+
+bitnami@ip-172-31-33-183:~$ sudo mongo meanhotel -u mikieseven -p moj0filter
+MongoDB shell version: 3.2.11
+connecting to: /opt/bitnami/mongodb/tmp/mongodb-27017.sock:27017/meanhotel
+2017-02-16T14:05:47.698+0000 E QUERY    [thread1] Error: Authentication failed. : DB.prototype._authOrThrow@src/mongo/shell/db.js:1441:20
+@(auth):6:1
+@(auth):1:2
+exception: login failed
+
+
+// test - create Admin in meanhotel & login
+> use meanhotel
+switched to db meanhotel
+> db.createUser({ user: "hotadmin", pwd: "n0aCcount", roles:[{ "role" : "readWrite","db": "meanhotel" }, {"role" : "dbAdmin", "db" : "meanhotel"}]})
+
+// results
+Successfully added user: {
+        "user" : "hotadmin",
+        "roles" : [
+                { "role" : "readWrite",
+                  "db" : "meanhotel"
+                },
+                { "role" : "dbAdmin",
+                  "db" : "meanhotel"
+                } ]
+			}
+>
+bitnami@ip-172-31-33-183:~$ sudo mongo meanhotel -u hotadmin -p n0aCcount
+MongoDB shell version: 3.2.11
+connecting to: /opt/bitnami/mongodb/tmp/mongodb-27017.sock:27017/meanhotel
+>

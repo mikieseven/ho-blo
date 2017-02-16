@@ -1,0 +1,16 @@
+// app is not displaying the hotels list...
+// login works in the app and user name is displayed
+// 
+
+// DB log entries - connecting via the Petite Hotel blog
+ 
+2017-02-16T14:48:01.154+0000 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:51401 #19 (1 connection now open)
+2017-02-16T14:48:01.257+0000 I ACCESS   [conn19] Successfully authenticated as principal hotmgr on meanhotel
+2017-02-16T14:48:01.268+0000 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:51402 #20 (2 connections now open)
+2017-02-16T14:48:01.281+0000 I INDEX    [conn19] build index on: meanhotel.hotels properties: { v: 1, key: { location.coordinates: "2dsphere" }, name: "location.coordinates_2dsphere", ns: "meanhotel.hotels", background: true, 2dsphereIndexVersion: 3 }
+2017-02-16T14:48:01.282+0000 I INDEX    [conn19] build index done.  scanned 12 total records. 0 secs
+2017-02-16T14:48:01.293+0000 I INDEX    [conn19] build index on: meanhotel.users properties: { v: 1, unique: true, key: { username: 1 }, name: "username_1", ns: "meanhotel.users", background: true }
+2017-02-16T14:48:01.293+0000 I INDEX    [conn19] build index done.  scanned 4 total records. 0 secs
+2017-02-16T14:48:01.333+0000 I ACCESS   [conn20] Successfully authenticated as principal hotmgr on meanhotel
+2017-02-16T14:57:22.772+0000 I NETWORK  [conn19] end connection 127.0.0.1:51401 (1 connection now open)
+2017-02-16T14:57:22.773+0000 I NETWORK  [conn20] end connection 127.0.0.1:51402 (0 connections now open)
